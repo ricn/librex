@@ -1,13 +1,13 @@
 defmodule Librex do
 
   def convert(file_to_convert, pdf_file) do
-    IO.puts System.tmp_dir!
-    file_name_only = Path.basename(file_to_convert, ".docx")
+    file_name_only = Path.basename(file_to_convert, Path.extname(file_to_convert))
     out_dir = System.tmp_dir! <> SecureRandom.uuid <> "/"
     run(file_to_convert, out_dir)
     temp_file = out_dir <> file_name_only <> ".pdf"
     File.cp! temp_file, pdf_file
     File.rm! temp_file
+    File.rmdir! out_dir
   end
 
   defp run(file_to_convert, out_dir) do
