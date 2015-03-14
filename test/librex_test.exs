@@ -5,16 +5,37 @@ defmodule LibrexTest do
   @pptx_file Path.join(__DIR__, "fixtures/pptx.pptx")
 
   test "convert docx to pdf" do
-    pdf_file = System.tmp_dir! <> SecureRandom.uuid <> ".pdf"
+    pdf_file = random_path <> ".pdf"
     assert !File.exists? pdf_file
     Librex.convert(@docx_file, pdf_file)
-    assert File.exists?(pdf_file)
+    assert is_pdf? pdf_file
   end
 
   test "convert pptx to pdf" do
-    pdf_file = System.tmp_dir! <> SecureRandom.uuid <> ".pdf"
+    pdf_file = random_path <> ".pdf"
     assert !File.exists? pdf_file
     Librex.convert(@pptx_file, pdf_file)
-    assert File.exists?(pdf_file)
+    assert is_pdf? pdf_file
+  end
+
+  test "convert docx to odt" do
+    odt_file = random_path <> ".odt"
+    assert !File.exists? odt_file
+    Librex.convert(@docx_file, odt_file)
+    assert is_odt? odt_file
+  end
+
+  defp is_pdf?(file) do
+    { _, data } = File.read(file)
+    String.starts_with? data, "%PDF"
+  end
+
+  defp is_odt?(file) do
+    { _, data } = File.read(file)
+    String.contains? data, "application/vnd.oasis.opendocument.text"
+  end
+
+  defp random_path do
+    System.tmp_dir! <> SecureRandom.uuid
   end
 end
