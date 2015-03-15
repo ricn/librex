@@ -26,12 +26,12 @@ defmodule LibrexTest do
   end
 
   defp is_pdf?(file) do
-    { _, data } = File.read(file)
+    { :ok, data } = File.read(file)
     String.starts_with? data, "%PDF"
   end
 
   defp is_odt?(file) do
-    { _, data } = File.read(file)
+    { :ok, data } = File.read(file)
     String.contains? data, "application/vnd.oasis.opendocument.text"
   end
 
