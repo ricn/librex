@@ -1,12 +1,12 @@
 defmodule Librex do
 
-  def convert(file_to_convert, pdf_file) do
+  def convert(file_to_convert, out_file) do
     file_name_only = Path.basename(file_to_convert, Path.extname(file_to_convert))
-    convert_to = String.replace(Path.extname(pdf_file), ".", "")
+    convert_to = String.replace(Path.extname(out_file), ".", "")
     out_dir = System.tmp_dir! <> SecureRandom.uuid <> "/"
     run(file_to_convert, out_dir, convert_to)
-    temp_file = out_dir <> file_name_only <> Path.extname(pdf_file)
-    File.cp! temp_file, pdf_file
+    temp_file = out_dir <> file_name_only <> Path.extname(out_file)
+    File.cp! temp_file, out_file
     File.rm! temp_file
     File.rmdir! out_dir
   end
