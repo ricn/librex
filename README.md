@@ -17,3 +17,10 @@ Add this to your `mix.exs` file, then run `mix do deps.get, deps.compile`:
 ```
 
 ## Examples
+```elixir
+  import Librex
+
+  convert("/Users/ricn/files/example.docx", "/Users/ricn/files/example.pdf")
+  
+  convert("/Users/ricn/files/example.docx", "/Users/ricn/files/example.odt")
+```
