@@ -5,7 +5,8 @@ defmodule Librex.Mixfile do
     [app: :librex,
      version: "0.1.0",
      elixir: "~> 1.0",
-     description: description
+     description: description,
+     package: package,
      deps: deps]
   end
 
@@ -17,15 +18,14 @@ defmodule Librex.Mixfile do
     [{:secure_random, "~> 0.1"}]
   end
 
-  defp description
+  defp description do
     "Convert office documents to other formats using LibreOffice"
   end
 
   defp package do
-    files: ["lib", "mix.exs", "README*", "LICENSE*"],
-    contributors: ["Richard Nyström"],
-    licenses: ["MIT"],
-    links: %{"GitHub" => "https://github.com/ricn/librex",
-           "Docs" => "https://github.com/ricn/librex"}]
+    [files: ["lib", "mix.exs", "README*", "LICENSE*"],
+     contributors: ["Richard Nyström"],
+     licenses: ["MIT"],
+     links: %{"GitHub" => "https://github.com/ricn/librex", "Docs" => "https://github.com/ricn/librex"}]
   end
 end
