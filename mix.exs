@@ -5,26 +5,27 @@ defmodule Librex.Mixfile do
     [app: :librex,
      version: "0.1.0",
      elixir: "~> 1.0",
+     description: description
      deps: deps]
   end
 
-  # Configuration for the OTP application
-  #
-  # Type `mix help compile.app` for more information
   def application do
     [applications: [:logger]]
   end
 
-  # Dependencies can be Hex packages:
-  #
-  #   {:mydep, "~> 0.3.0"}
-  #
-  # Or git/path repositories:
-  #
-  #   {:mydep, git: "https://github.com/elixir-lang/mydep.git", tag: "0.1.0"}
-  #
-  # Type `mix help deps` for more examples and options
   defp deps do
     [{:secure_random, "~> 0.1"}]
+  end
+
+  defp description
+    "Convert office documents to other formats using LibreOffice"
+  end
+
+  defp package do
+    files: ["lib", "mix.exs", "README*", "LICENSE*"],
+    contributors: ["Richard Nyström"],
+    licenses: ["MIT"],
+    links: %{"GitHub" => "https://github.com/ricn/librex",
+           "Docs" => "https://github.com/ricn/librex"}]
   end
 end
