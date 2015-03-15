@@ -6,21 +6,21 @@ defmodule LibrexTest do
 
   test "convert docx to pdf" do
     pdf_file = random_path <> ".pdf"
-    assert !File.exists? pdf_file
+    refute File.exists? pdf_file
     Librex.convert(@docx_file, pdf_file)
     assert is_pdf? pdf_file
   end
 
   test "convert pptx to pdf" do
     pdf_file = random_path <> ".pdf"
-    assert !File.exists? pdf_file
+    refute File.exists? pdf_file
     Librex.convert(@pptx_file, pdf_file)
     assert is_pdf? pdf_file
   end
 
   test "convert docx to odt" do
     odt_file = random_path <> ".odt"
-    assert !File.exists? odt_file
+    refute File.exists? odt_file
     Librex.convert(@docx_file, odt_file)
     assert is_odt? odt_file
   end
