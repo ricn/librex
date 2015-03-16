@@ -8,7 +8,7 @@ defmodule Librex do
 
     basename = Path.basename(in_file, Path.extname(in_file))
     convert_to = String.replace(Path.extname(out_file), ".", "")
-    out_temp_dir = System.tmp_dir! <> SecureRandom.uuid <> "/"
+    out_temp_dir = System.tmp_dir! <> "/" <> SecureRandom.uuid <> "/"
     out_temp_file = out_temp_dir <> basename <> Path.extname(out_file)
 
     run(in_file, out_temp_dir, convert_to)
