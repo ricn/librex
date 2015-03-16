@@ -29,7 +29,7 @@ defmodule LibrexTest do
     assert is_odt? odt_file
   end
 
-  test ".convert must return :error when file to convert does not exist" do
+  test ".convert must return error when file to convert does not exist" do
     { :error, reason } = Librex.convert(@non_existent_file, "/tmp/output.pdf")
     assert reason == :enoent
   end
@@ -45,6 +45,26 @@ defmodule LibrexTest do
     assert_raise File.Error, msg, fn ->
       Librex.convert!(@non_existent_file, "/tmp/output.pdf")
     end
+  end
+
+  test "convert must return error when LibreOffice executable can't be found" do
+    cmd = "sofice" # misspelled
+    msg = "LibreOffice (#{cmd}) executable could not be found."
+    assert_raise RuntimeError, msg, fn ->
+      Librex.convert(@docx_file, "/tmp/output.pdf", "sofice")
+    end
+
+    assert_raise RuntimeError, msg, fn ->
+      Librex.convert!(@docx_file, "/tmp/output.pdf", "sofice")
+    end
+  end
+
+  test "convert must have the possibility to specify LibreOffice command" do
+    pdf_file = random_path <> ".pdf"
+    refute File.exists? pdf_file
+    { :ok, out_file } = Librex.convert(@docx_file, pdf_file, System.find_executable("soffice"))
+    assert pdf_file == out_file
+    assert is_pdf? pdf_file
   end
 
   defp is_pdf?(file) do
