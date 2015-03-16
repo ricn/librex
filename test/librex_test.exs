@@ -44,6 +44,6 @@ defmodule LibrexTest do
   end
 
   defp random_path do
-    System.tmp_dir! <> SecureRandom.uuid
+    System.tmp_dir! <> "/" <> SecureRandom.uuid
   end
 end
