@@ -3,6 +3,7 @@ defmodule LibrexTest do
 
   @docx_file Path.join(__DIR__, "fixtures/docx.docx")
   @pptx_file Path.join(__DIR__, "fixtures/pptx.pptx")
+  @non_existent_file Path.join(__DIR__, "fixtures/non.existent")
 
   test "convert docx to pdf" do
     pdf_file = random_path <> ".pdf"
@@ -23,6 +24,13 @@ defmodule LibrexTest do
     refute File.exists? odt_file
     Librex.convert(@docx_file, odt_file)
     assert is_odt? odt_file
+  end
+
+  test "raise error when file to convert does not exist" do
+    msg = "could not read #{@non_existent_file}: no such file or directory"
+    assert_raise File.Error, msg, fn ->
+      Librex.convert(@non_existent_file, "/tmp/output.pdf")
+    end
   end
 
   defp is_pdf?(file) do

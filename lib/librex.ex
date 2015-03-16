@@ -1,6 +1,11 @@
 defmodule Librex do
 
+
   def convert(in_file, out_file) do
+    unless File.exists?(in_file) do
+      raise File.Error, reason: :enoent, action: "read", path: in_file
+    end
+
     basename = Path.basename(in_file, Path.extname(in_file))
     convert_to = String.replace(Path.extname(out_file), ".", "")
     out_temp_dir = System.tmp_dir! <> SecureRandom.uuid <> "/"
