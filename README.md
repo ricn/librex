@@ -1,7 +1,9 @@
 Librex
 ======
 
-Convert office documents to other formats using LibreOffice.
+Elixir library to convert office documents to other formats using LibreOffice.
+
+[![Build Status](https://travis-ci.org/ricn/libreconv.png?branch=master)](https://travis-ci.org/ricn/libreconv)
 
 ## Requirements
 
@@ -21,6 +23,6 @@ Add this to your `mix.exs` file, then run `mix do deps.get, deps.compile`:
   import Librex
 
   convert("/Users/ricn/files/example.docx", "/Users/ricn/files/example.pdf")
-  
+
   convert("/Users/ricn/files/example.docx", "/Users/ricn/files/example.odt")
 ```
