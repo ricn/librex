@@ -3,7 +3,7 @@ Librex
 
 Elixir library to convert office documents to other formats using LibreOffice.
 
-[![Build Status](https://travis-ci.org/ricn/libreconv.png?branch=master)](https://travis-ci.org/ricn/libreconv)
+[![Build Status](https://travis-ci.org/ricn/librex.png?branch=master)](https://travis-ci.org/ricn/librex)
 
 ## Requirements
 
