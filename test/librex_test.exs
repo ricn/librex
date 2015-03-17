@@ -61,7 +61,6 @@ defmodule LibrexTest do
 
   test "convert must have the possibility to specify LibreOffice command" do
     pdf_file = random_path <> ".pdf"
-    refute File.exists? pdf_file
     { :ok, out_file } = Librex.convert(@docx_file, pdf_file, System.find_executable("soffice"))
     assert pdf_file == out_file
     assert is_pdf? pdf_file
