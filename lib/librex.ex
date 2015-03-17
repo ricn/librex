@@ -1,9 +1,9 @@
 defmodule Librex do
 
   def convert(in_file, out_file, soffice_cmd \\ "soffice") do
-    case File.stat(in_file) do
-      {:ok, _} -> do_convert(in_file, out_file, soffice_cmd)
-      {:error, reason} -> { :error, reason }
+    case File.read(in_file) do
+      {:ok, _}  -> do_convert(in_file, out_file, soffice_cmd)
+      {:error, reason } -> {:error, reason}
     end
   end
 

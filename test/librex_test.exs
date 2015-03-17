@@ -40,7 +40,7 @@ defmodule LibrexTest do
     assert pdf_file == out_file
   end
 
-  test ".convert! raise error when file to convert does not exist" do
+  test ".convert! must raise error when file to convert does not exist" do
     msg = "could not read #{@non_existent_file}: no such file or directory"
     assert_raise File.Error, msg, fn ->
       Librex.convert!(@non_existent_file, "/tmp/output.pdf")
@@ -64,6 +64,18 @@ defmodule LibrexTest do
     { :ok, out_file } = Librex.convert(@docx_file, pdf_file, System.find_executable("soffice"))
     assert pdf_file == out_file
     assert is_pdf? pdf_file
+  end
+
+  test "convert must return error when file to convert is directory" do
+    pdf_file = random_path <> ".pdf"
+    assert Librex.convert(System.tmp_dir!, pdf_file) == {:error, :eisdir}
+  end
+
+  test ".convert! must raise error when file to convert is directory" do
+    msg = "could not read #{System.tmp_dir!}: illegal operation on a directory"
+    assert_raise File.Error, msg, fn ->
+      Librex.convert!(System.tmp_dir!, "/tmp/output.pdf")
+    end
   end
 
   defp is_pdf?(file) do
