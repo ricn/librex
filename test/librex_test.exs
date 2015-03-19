@@ -2,31 +2,45 @@ defmodule LibrexTest do
   use ExUnit.Case
 
   @docx_file Path.join(__DIR__, "fixtures/docx.docx")
+  @odt_file Path.join(__DIR__, "fixtures/odt.odt")
+
   @pptx_file Path.join(__DIR__, "fixtures/pptx.pptx")
+  @odp_file Path.join(__DIR__, "fixtures/odp.odp")
+
+  @xlsx_file Path.join(__DIR__, "fixtures/xlsx.xlsx")
+  @ods_file Path.join(__DIR__, "fixtures/ods.ods")
+
   @non_existent_file Path.join(__DIR__, "fixtures/non.existent")
 
-  test ".convert docx to pdf" do
-    pdf_file = random_path <> ".pdf"
-    refute File.exists? pdf_file
-    { :ok, out_file } = Librex.convert(@docx_file, pdf_file)
-    assert pdf_file == out_file
-    assert is_pdf? pdf_file
+  test ".convert docx to other supported formats" do
+    Enum.each(Librex.supported_doc_formats, fn(format) -> test_conversion(@docx_file, format) end)
   end
 
-  test ".convert pptx to pdf" do
-    pdf_file = random_path <> ".pdf"
-    refute File.exists? pdf_file
-    { :ok, out_file } = Librex.convert(@pptx_file, pdf_file)
-    assert pdf_file == out_file
-    assert is_pdf? pdf_file
+  test ".convert odt to other supported formats" do
+    Enum.each(Librex.supported_doc_formats, fn(format) -> test_conversion(@odt_file, format) end)
   end
 
-  test ".convert docx to odt" do
-    odt_file = random_path <> ".odt"
-    refute File.exists? odt_file
-    { :ok, out_file } = Librex.convert(@docx_file, odt_file)
-    assert odt_file == out_file
-    assert is_odt? odt_file
+  test ".convert pptx to other supported formats" do
+    Enum.each(Librex.supported_presentation_formats, fn(format) -> test_conversion(@pptx_file, format) end)
+  end
+
+  test ".convert odp to other supported formats" do
+    Enum.each(Librex.supported_presentation_formats, fn(format) -> test_conversion(@odp_file, format) end)
+  end
+
+  test ".convert xlsx to other supported formats" do
+    Enum.each(Librex.supported_spreadsheet_formats, fn(format) -> test_conversion(@xlsx_file, format) end)
+  end
+
+  test ".convert ods to other supported formats" do
+    Enum.each(Librex.supported_spreadsheet_formats, fn(format) -> test_conversion(@ods_file, format) end)
+  end
+
+  defp test_conversion(input_file, output_format) do
+    output_file = random_path <> "." <> output_format
+    refute File.exists? output_file
+    { :ok, result } = Librex.convert(input_file, output_file)
+    assert output_file == result
   end
 
   test ".convert must return error when file to convert does not exist" do
@@ -97,11 +111,6 @@ defmodule LibrexTest do
   defp is_pdf?(file) do
     { :ok, data } = File.read(file)
     String.starts_with? data, "%PDF"
-  end
-
-  defp is_odt?(file) do
-    { :ok, data } = File.read(file)
-    String.contains? data, "application/vnd.oasis.opendocument.text"
   end
 
   defp random_path do
