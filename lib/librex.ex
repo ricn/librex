@@ -17,6 +17,10 @@ defmodule Librex do
       (librex) lib/librex.ex:13: Librex.convert!/3
    """
 
+  @doc """
+    Converts in_file to out_file
+    Returns `:ok` if successful, `{:error, reason}` otherwise.
+  """
   def convert(in_file, out_file, soffice_cmd \\ "soffice") do
     case File.read(in_file) do
       {:ok, _}  -> do_convert(in_file, out_file, soffice_cmd)
@@ -24,6 +28,9 @@ defmodule Librex do
     end
   end
 
+  @doc """
+    The same as `convert/3`, but raises an exception if it fails.
+  """
   def convert!(in_file, out_file, soffice_cmd \\ "soffice") do
     case convert(in_file, out_file, soffice_cmd) do
       {:ok, _}      -> out_file
