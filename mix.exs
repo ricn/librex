@@ -15,7 +15,8 @@ defmodule Librex.Mixfile do
   end
 
   defp deps do
-    [{:secure_random, "~> 0.1"}]
+    [{:secure_random, "~> 0.1"},
+     {:inch_ex, only: :docs}]
   end
 
   defp description do

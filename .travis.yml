@@ -6,3 +6,6 @@ notifications:
     - ricn@rny.io
 before_install:
   - sudo apt-get install libreoffice
+after_script:
+  - MIX_ENV=docs mix deps.get
+  - MIX_ENV=docs mix inch.report
