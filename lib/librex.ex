@@ -1,4 +1,21 @@
 defmodule Librex do
+  @moduledoc """
+  Provides functions to convert office documents to other formats.
+
+   ## Examples
+      iex(1)> Librex.convert("test/fixtures/docx.docx", "/Users/ricn/docx.pdf")
+      {:ok, "/Users/ricn/docx.pdf"}
+
+      iex(2)> Librex.convert("non_existent_file", "/Users/ricn/docx.pdf")
+      {:error, :enoent}
+
+      iex(3)> Librex.convert!("test/fixtures/docx.docx", "/Users/ricn/docx.pdf")
+      "/Users/ricn/docx.pdf"
+
+      iex(4)> Librex.convert!("non_existent_file", "/Users/ricn/docx.pdf")
+      ** (File.Error) could not read non_existent_file: no such file or directory
+      (librex) lib/librex.ex:13: Librex.convert!/3
+   """
 
   def convert(in_file, out_file, soffice_cmd \\ "soffice") do
     case File.read(in_file) do
