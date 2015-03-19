@@ -22,7 +22,7 @@ defmodule Librex do
     Returns `:ok` if successful, `{:error, reason}` otherwise.
   """
   def convert(in_file, out_file, soffice_cmd \\ "soffice") do
-    case File.read(in_file) do
+    case validate(in_file, out_file, soffice_cmd) do
       {:ok, _}  -> do_convert(in_file, out_file, soffice_cmd)
       {:error, reason } -> {:error, reason}
     end
@@ -34,7 +34,43 @@ defmodule Librex do
   def convert!(in_file, out_file, soffice_cmd \\ "soffice") do
     case convert(in_file, out_file, soffice_cmd) do
       {:ok, _}      -> out_file
-      {:error, reason} -> raise File.Error, reason: reason, action: "read", path: in_file
+      {:error, reason} -> raise_error(reason, in_file)
+    end
+  end
+
+  defp raise_error(reason, in_file) do
+    if is_atom(reason) do
+      raise File.Error, reason: reason, action: "read", path: in_file
+    else
+      raise RuntimeError, message: reason
+    end
+  end
+
+  defp validate(input_file, output_file, soffice_cmd) do
+    validate_input(input_file)
+    |> validate_output(output_file)
+    |> validate_soffice(soffice_cmd)
+  end
+
+  defp validate_input(input_file) do
+    File.read(input_file)
+  end
+
+  defp validate_output(result, output_file) do
+    output_ext = String.replace(Path.extname(output_file), ".", "")
+    supported_exts = ["pdf", "odt"]
+    if Enum.any?(supported_exts, fn(ext) -> ext == output_ext end) do
+      result
+    else
+      {:error, "#{output_ext} is not a supported output format"}
+    end
+  end
+
+  defp validate_soffice(result, soffice_cmd) do
+    if System.find_executable(soffice_cmd) do
+      result
+    else
+      {:error, "LibreOffice (#{soffice_cmd}) executable could not be found."}
     end
   end
 
@@ -56,9 +92,6 @@ defmodule Librex do
   defp run(file_to_convert, out_dir, convert_to, soffice_cmd) do
     opts = ["--headless", "--convert-to", convert_to, "--outdir", out_dir, file_to_convert]
     cmd = System.find_executable(soffice_cmd)
-    case cmd do
-      nil -> raise RuntimeError, message: "LibreOffice (#{soffice_cmd}) executable could not be found."
-      _ -> System.cmd(cmd, opts, stderr_to_stdout: true)
-    end
+    System.cmd(cmd, opts, stderr_to_stdout: true)
   end
 end

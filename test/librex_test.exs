@@ -50,9 +50,13 @@ defmodule LibrexTest do
   test "convert must return error when LibreOffice executable can't be found" do
     cmd = "sofice" # misspelled
     msg = "LibreOffice (#{cmd}) executable could not be found."
-    assert_raise RuntimeError, msg, fn ->
-      Librex.convert(@docx_file, "/tmp/output.pdf", "sofice")
-    end
+    {:error, reason} = Librex.convert(@docx_file, "/tmp/output.pdf", "sofice")
+    assert reason == msg
+  end
+
+  test "convert! must raise error when LibreOffice executable can't be found" do
+    cmd = "sofice" # misspelled
+    msg = "LibreOffice (#{cmd}) executable could not be found."
 
     assert_raise RuntimeError, msg, fn ->
       Librex.convert!(@docx_file, "/tmp/output.pdf", "sofice")
@@ -75,6 +79,18 @@ defmodule LibrexTest do
     msg = "could not read #{System.tmp_dir!}: illegal operation on a directory"
     assert_raise File.Error, msg, fn ->
       Librex.convert!(System.tmp_dir!, "/tmp/output.pdf")
+    end
+  end
+
+  test "convert must return error when output file has wrong extension" do
+    { :error, reason } = Librex.convert(@docx_file, "/tmp/output.mp3")
+    assert reason == "mp3 is not a supported output format"
+  end
+
+  test "convert! must raise error when output file has wrong extension" do
+    msg = "mp3 is not a supported output format"
+    assert_raise RuntimeError, msg, fn ->
+      Librex.convert!(@docx_file, "/tmp/output.mp3")
     end
   end
 
