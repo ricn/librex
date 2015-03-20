@@ -29,6 +29,6 @@ defmodule Librex.Mixfile do
     [files: ["lib", "mix.exs", "README*", "LICENSE*"],
      contributors: ["Richard Nyström"],
      licenses: ["MIT"],
-     links: %{"GitHub" => "https://github.com/ricn/librex", "Docs" => "https://github.com/ricn/librex"}]
+     links: %{"GitHub" => "https://github.com/ricn/librex", "Docs" => "http://hexdocs.pm/librex"}]
   end
 end
