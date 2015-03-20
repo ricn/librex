@@ -17,7 +17,7 @@ The code has been tested with Libreoffice 4.4.
 Add this to your `mix.exs` file, then run `mix do deps.get, deps.compile`:
 
 ```elixir
-  {:librex, "~> 0.1"}
+  {:librex, "~> 0.9"}
 ```
 
 ## Examples
