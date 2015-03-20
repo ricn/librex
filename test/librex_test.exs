@@ -39,19 +39,16 @@ defmodule LibrexTest do
   defp test_conversion(input_file, output_format) do
     output_file = random_path <> "." <> output_format
     refute File.exists? output_file
-    { :ok, result } = Librex.convert(input_file, output_file)
-    assert output_file == result
+    assert { :ok, output_file } == Librex.convert(input_file, output_file)
   end
 
   test ".convert must return error when file to convert does not exist" do
-    { :error, reason } = Librex.convert(@non_existent_file, "/tmp/output.pdf")
-    assert reason == :enoent
+    assert { :error, :enoent } == Librex.convert(@non_existent_file, "/tmp/output.pdf")
   end
 
   test ".convert! must return output file path" do
     pdf_file = random_path <> ".pdf"
-    out_file = Librex.convert!(@docx_file, pdf_file)
-    assert pdf_file == out_file
+    assert pdf_file == Librex.convert!(@docx_file, pdf_file)
   end
 
   test ".convert! must raise error when file to convert does not exist" do
@@ -64,27 +61,23 @@ defmodule LibrexTest do
   test "convert must return error when LibreOffice executable can't be found" do
     cmd = "sofice" # misspelled
     msg = "LibreOffice (#{cmd}) executable could not be found."
-    {:error, reason} = Librex.convert(@docx_file, "/tmp/output.pdf", "sofice")
-    assert reason == msg
+    assert {:error, msg} == Librex.convert(@docx_file, "/tmp/output.pdf", "sofice")
   end
 
   test "convert! must raise error when LibreOffice executable can't be found" do
     cmd = "sofice" # misspelled
     msg = "LibreOffice (#{cmd}) executable could not be found."
-
     assert_raise RuntimeError, msg, fn ->
       Librex.convert!(@docx_file, "/tmp/output.pdf", "sofice")
     end
   end
 
-  test "convert must have the possibility to specify LibreOffice command" do
+  test ".convert must have the possibility to specify LibreOffice command" do
     pdf_file = random_path <> ".pdf"
-    { :ok, out_file } = Librex.convert(@docx_file, pdf_file, System.find_executable("soffice"))
-    assert pdf_file == out_file
-    assert is_pdf? pdf_file
+    assert { :ok, pdf_file } == Librex.convert(@docx_file, pdf_file, System.find_executable("soffice"))
   end
 
-  test "convert must return error when file to convert is directory" do
+  test ".convert must return error when file to convert is directory" do
     pdf_file = random_path <> ".pdf"
     assert Librex.convert(System.tmp_dir!, pdf_file) == {:error, :eisdir}
   end
@@ -96,7 +89,7 @@ defmodule LibrexTest do
     end
   end
 
-  test "convert must return error when output file has wrong extension" do
+  test ".convert must return error when output file has wrong extension" do
     { :error, reason } = Librex.convert(@docx_file, "/tmp/output.mp3")
     assert reason == "mp3 is not a supported output format"
   end
@@ -106,11 +99,6 @@ defmodule LibrexTest do
     assert_raise RuntimeError, msg, fn ->
       Librex.convert!(@docx_file, "/tmp/output.mp3")
     end
-  end
-
-  defp is_pdf?(file) do
-    { :ok, data } = File.read(file)
-    String.starts_with? data, "%PDF"
   end
 
   defp random_path do
