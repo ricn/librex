@@ -38,6 +38,27 @@ defmodule Librex do
     end
   end
 
+  @doc """
+    Supported document formats
+  """
+  def supported_doc_formats do
+    ["pdf", "odt", "txt", "rtf", "docx", "doc"]
+  end
+
+  @doc """
+    Supported presentation formats
+  """
+  def supported_presentation_formats do
+    ["pdf", "odp", "txt", "pptx", "ppt"]
+  end
+
+  @doc """
+    Supported spreadsheet formats
+  """
+  def supported_spreadsheet_formats do
+    ["pdf", "ods", "xlsx", "csv", "xls"]
+  end
+
   defp raise_error(reason, in_file) do
     if is_atom(reason) do
       raise File.Error, reason: reason, action: "read", path: in_file
@@ -67,18 +88,6 @@ defmodule Librex do
 
   defp supported_formats do
     supported_doc_formats ++ supported_presentation_formats ++ supported_spreadsheet_formats
-  end
-
-  def supported_doc_formats do
-    ["pdf", "odt", "txt", "rtf", "docx", "doc"]
-  end
-
-  def supported_presentation_formats do
-    ["pdf", "odp", "txt", "pptx", "ppt"]
-  end
-
-  def supported_spreadsheet_formats do
-    ["pdf", "ods", "xlsx", "csv", "xls"]
   end
 
   defp validate_soffice(result, soffice_cmd) do
