@@ -1,6 +1,9 @@
 defmodule Librex do
   @moduledoc """
-  Provides functions to convert office documents to other formats. LibreOffice must be installed.
+  Provides functions to convert office documents, spreadsheets & presentations to other formats.
+
+  LibreOffice must be installed. It's recommended that you add the soffice binary your PATH. Otherwise you have to specify the
+  absolute path to the soffice binary as the last .
 
    ## Examples
 
@@ -19,6 +22,11 @@ defmodule Librex do
       iex(4)> Librex.convert!("non_existent_file", "/Users/ricn/docx.pdf")
 
       ** (File.Error) could not read non_existent_file: no such file or directory (librex) lib/librex.ex:13: Librex.convert!/3
+
+      iex(5)> Librex.convert("test/fixtures/docx.docx", "/Users/ricn/docx.pdf", "/path_to/soffice")
+
+      `{:ok, "/Users/ricn/docx.pdf"}`
+
    """
 
   @doc """
