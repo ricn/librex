@@ -13,11 +13,11 @@ defmodule LibrexTest do
   @non_existent_file Path.join(__DIR__, "fixtures/non.existent")
 
   test ".convert docx to other supported formats" do
-    Enum.each(Librex.supported_doc_formats, fn(format) -> test_conversion(@docx_file, format) end)
+    Enum.each(Librex.supported_document_formats, fn(format) -> test_conversion(@docx_file, format) end)
   end
 
   test ".convert odt to other supported formats" do
-    Enum.each(Librex.supported_doc_formats, fn(format) -> test_conversion(@odt_file, format) end)
+    Enum.each(Librex.supported_document_formats, fn(format) -> test_conversion(@odt_file, format) end)
   end
 
   test ".convert pptx to other supported formats" do

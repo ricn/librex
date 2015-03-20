@@ -41,7 +41,7 @@ defmodule Librex do
   @doc """
     Supported document formats
   """
-  def supported_doc_formats do
+  def supported_document_formats do
     ["pdf", "odt", "txt", "rtf", "docx", "doc"]
   end
 
@@ -87,7 +87,7 @@ defmodule Librex do
   end
 
   defp supported_formats do
-    supported_doc_formats ++ supported_presentation_formats ++ supported_spreadsheet_formats
+    supported_document_formats ++ supported_presentation_formats ++ supported_spreadsheet_formats
   end
 
   defp validate_soffice(result, soffice_cmd) do
