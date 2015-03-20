@@ -3,11 +3,12 @@ defmodule Librex do
   Provides functions to convert office documents to other formats.
 
    ## Examples
+
       iex(1)> Librex.convert("test/fixtures/docx.docx", "/Users/ricn/docx.pdf")
-      {:ok, "/Users/ricn/docx.pdf"}
+      `{:ok, "/Users/ricn/docx.pdf"}`
 
       iex(2)> Librex.convert("non_existent_file", "/Users/ricn/docx.pdf")
-      {:error, :enoent}
+      `{:error, :enoent}`
 
       iex(3)> Librex.convert!("test/fixtures/docx.docx", "/Users/ricn/docx.pdf")
       "/Users/ricn/docx.pdf"

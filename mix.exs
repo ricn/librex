@@ -3,7 +3,7 @@ defmodule Librex.Mixfile do
 
   def project do
     [app: :librex,
-     version: "0.1.0",
+     version: "0.9.0",
      elixir: "~> 1.0",
      description: description,
      package: package,
@@ -16,7 +16,9 @@ defmodule Librex.Mixfile do
 
   defp deps do
     [{:secure_random, "~> 0.1"},
-     {:inch_ex, only: :docs}]
+     {:inch_ex, only: :docs},
+     {:earmark, "~> 0.1", only: :dev},
+     {:ex_doc, "~> 0.7", only: :dev}]
   end
 
   defp description do
