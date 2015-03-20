@@ -104,9 +104,9 @@ defmodule Librex do
     out_temp_dir = System.tmp_dir! <> "/" <> SecureRandom.uuid <> "/"
     out_temp_file = out_temp_dir <> basename <> Path.extname(out_file)
 
-    run(in_file, out_temp_dir, convert_to, soffice_cmd)
+    run(Path.expand(in_file), out_temp_dir, convert_to, soffice_cmd)
 
-    File.cp! out_temp_file, out_file
+    File.cp! out_temp_file, Path.expand(out_file)
     File.rm! out_temp_file
     File.rmdir! out_temp_dir
 
