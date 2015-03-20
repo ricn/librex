@@ -54,21 +54,21 @@ defmodule Librex do
     Returns supported document formats
   """
   def supported_document_formats do
-    ["pdf", "odt", "txt", "rtf", "docx", "doc"]
+    ["pdf", "odt", "txt", "rtf", "docx", "doc", "html"]
   end
 
   @doc """
     Returns supported presentation formats
   """
   def supported_presentation_formats do
-    ["pdf", "odp", "txt", "pptx", "ppt"]
+    ["pdf", "odp", "txt", "pptx", "ppt", "html"]
   end
 
   @doc """
     Returns supported spreadsheet formats
   """
   def supported_spreadsheet_formats do
-    ["pdf", "ods", "xlsx", "csv", "xls"]
+    ["pdf", "ods", "xlsx", "csv", "xls", "html"]
   end
 
   defp raise_error(reason, in_file) do
