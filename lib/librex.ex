@@ -1,21 +1,24 @@
 defmodule Librex do
   @moduledoc """
-  Provides functions to convert office documents to other formats.
+  Provides functions to convert office documents to other formats. LibreOffice must be installed.
 
    ## Examples
 
       iex(1)> Librex.convert("test/fixtures/docx.docx", "/Users/ricn/docx.pdf")
+
       `{:ok, "/Users/ricn/docx.pdf"}`
 
       iex(2)> Librex.convert("non_existent_file", "/Users/ricn/docx.pdf")
+
       `{:error, :enoent}`
 
       iex(3)> Librex.convert!("test/fixtures/docx.docx", "/Users/ricn/docx.pdf")
+
       "/Users/ricn/docx.pdf"
 
       iex(4)> Librex.convert!("non_existent_file", "/Users/ricn/docx.pdf")
-      ** (File.Error) could not read non_existent_file: no such file or directory
-      (librex) lib/librex.ex:13: Librex.convert!/3
+
+      ** (File.Error) could not read non_existent_file: no such file or directory (librex) lib/librex.ex:13: Librex.convert!/3
    """
 
   @doc """
@@ -40,21 +43,21 @@ defmodule Librex do
   end
 
   @doc """
-    Supported document formats
+    Returns supported document formats
   """
   def supported_document_formats do
     ["pdf", "odt", "txt", "rtf", "docx", "doc"]
   end
 
   @doc """
-    Supported presentation formats
+    Returns supported presentation formats
   """
   def supported_presentation_formats do
     ["pdf", "odp", "txt", "pptx", "ppt"]
   end
 
   @doc """
-    Supported spreadsheet formats
+    Returns supported spreadsheet formats
   """
   def supported_spreadsheet_formats do
     ["pdf", "ods", "xlsx", "csv", "xls"]
