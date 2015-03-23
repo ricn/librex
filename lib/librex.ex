@@ -126,7 +126,8 @@ defmodule Librex do
   end
 
   defp run(file_to_convert, out_dir, convert_to, soffice_cmd) do
-    opts = ["--headless", "--convert-to", convert_to, "--outdir", out_dir, file_to_convert]
+    user_installation = "-env:UserInstallation=file://" <> System.tmp_dir! <> "/" <> "librex_oouser"
+    opts = [user_installation, "--headless", "--convert-to", convert_to, "--outdir", out_dir, file_to_convert]
     cmd = System.find_executable(soffice_cmd)
     System.cmd(cmd, opts, stderr_to_stdout: true)
   end
