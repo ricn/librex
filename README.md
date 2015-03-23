@@ -17,7 +17,7 @@ absolute path to the soffice binary as the last parameter.
 Add this to your `mix.exs` file, then run `mix do deps.get, deps.compile`:
 
 ```elixir
-  {:librex, "~> 0.9"}
+  {:librex, "~> 1.0"}
 ```
 
 ## Examples

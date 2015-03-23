@@ -3,7 +3,7 @@ defmodule Librex.Mixfile do
 
   def project do
     [app: :librex,
-     version: "0.9.1",
+     version: "1.0.0",
      elixir: "~> 1.0",
      description: description,
      package: package,
