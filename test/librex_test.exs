@@ -1,5 +1,5 @@
 defmodule LibrexTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
 
   @docx_file Path.join(__DIR__, "fixtures/docx.docx")
   @odt_file Path.join(__DIR__, "fixtures/odt.odt")
@@ -13,27 +13,28 @@ defmodule LibrexTest do
   @non_existent_file Path.join(__DIR__, "fixtures/non.existent")
 
   test ".convert docx to other supported formats" do
-    Enum.each(Librex.supported_document_formats, fn(format) -> test_conversion(@docx_file, format) end)
+    #Librex.supported_document_formats
+    Enum.each(["pdf", "odt"], fn(format) -> test_conversion(@docx_file, format) end)
   end
 
   test ".convert odt to other supported formats" do
-    Enum.each(Librex.supported_document_formats, fn(format) -> test_conversion(@odt_file, format) end)
+    Enum.each(["pdf", "docx"], fn(format) -> test_conversion(@odt_file, format) end)
   end
 
   test ".convert pptx to other supported formats" do
-    Enum.each(Librex.supported_presentation_formats, fn(format) -> test_conversion(@pptx_file, format) end)
+    Enum.each(["pdf", "odp"], fn(format) -> test_conversion(@pptx_file, format) end)
   end
 
   test ".convert odp to other supported formats" do
-    Enum.each(Librex.supported_presentation_formats, fn(format) -> test_conversion(@odp_file, format) end)
+    Enum.each(["pdf", "pptx"], fn(format) -> test_conversion(@odp_file, format) end)
   end
 
   test ".convert xlsx to other supported formats" do
-    Enum.each(Librex.supported_spreadsheet_formats, fn(format) -> test_conversion(@xlsx_file, format) end)
+    Enum.each(["pdf", "ods"], fn(format) -> test_conversion(@xlsx_file, format) end)
   end
 
   test ".convert ods to other supported formats" do
-    Enum.each(Librex.supported_spreadsheet_formats, fn(format) -> test_conversion(@ods_file, format) end)
+    Enum.each(["pdf", "xlsx"], fn(format) -> test_conversion(@ods_file, format) end)
   end
 
   defp test_conversion(input_file, output_format) do
