@@ -9,8 +9,8 @@ Elixir library to convert office documents to other formats using LibreOffice.
 
 ## Requirements
 
-You must have LibreOffice installed of course and the soffice binary must be present in your PATH.
-The code has been tested with Libreoffice 4.4.
+LibreOffice must be installed. It's recommended that you add the soffice binary your PATH. Otherwise you have to specify the
+absolute path to the soffice binary as the last parameter.
 
 ## Installation
 

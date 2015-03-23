@@ -3,7 +3,7 @@ defmodule Librex do
   Provides functions to convert office documents, spreadsheets & presentations to other formats.
 
   LibreOffice must be installed. It's recommended that you add the soffice binary your PATH. Otherwise you have to specify the
-  absolute path to the soffice binary as the last .
+  absolute path to the soffice binary as the last parameter.
 
    ## Examples
 
