@@ -7,7 +7,8 @@ defmodule Librex.Mixfile do
      elixir: "~> 1.0",
      description: description,
      package: package,
-     deps: deps]
+     deps: deps,
+     test_coverage: [tool: ExCoveralls]]
   end
 
   def application do
@@ -18,7 +19,8 @@ defmodule Librex.Mixfile do
     [{:secure_random, "~> 0.1"},
      {:inch_ex, only: :docs},
      {:earmark, "~> 0.1", only: :dev},
-     {:ex_doc, "~> 0.7", only: :dev}]
+     {:ex_doc, "~> 0.7", only: :dev},
+     {:excoveralls, "~> 0.3", only: [:dev, :test]}]
   end
 
   defp description do

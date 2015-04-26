@@ -9,3 +9,5 @@ before_install:
 after_script:
   - MIX_ENV=docs mix deps.get
   - MIX_ENV=docs mix inch.report
+after_success:
+  - "mix compile && mix coveralls.travis"
