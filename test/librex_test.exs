@@ -52,7 +52,7 @@ defmodule LibrexTest do
   end
 
   test ".convert! must raise error when file to convert does not exist" do
-    msg = "could not read #{@non_existent_file}: no such file or directory"
+    msg = "could not read \"#{@non_existent_file}\": no such file or directory"
     assert_raise File.Error, msg, fn ->
       Librex.convert!(@non_existent_file, "/tmp/output.pdf")
     end
@@ -83,7 +83,7 @@ defmodule LibrexTest do
   end
 
   test ".convert! must raise error when file to convert is directory" do
-    msg = "could not read #{System.tmp_dir!}: illegal operation on a directory"
+    msg = "could not read \"#{System.tmp_dir!}\": illegal operation on a directory"
     assert_raise File.Error, msg, fn ->
       Librex.convert!(System.tmp_dir!, "/tmp/output.pdf")
     end
