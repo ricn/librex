@@ -5,9 +5,9 @@ defmodule Librex.Mixfile do
     [app: :librex,
      version: "1.0.1",
      elixir: "~> 1.0",
-     description: description,
-     package: package,
-     deps: deps,
+     description: description(),
+     package: package(),
+     deps: deps(),
      test_coverage: [tool: ExCoveralls]]
   end
 
