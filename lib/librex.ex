@@ -91,7 +91,7 @@ defmodule Librex do
 
   defp validate_output(result, output_file) do
     output_ext = String.replace(Path.extname(output_file), ".", "")
-    if Enum.any?(supported_formats, fn(ext) -> ext == output_ext end) do
+    if Enum.any?(supported_formats(), fn(ext) -> ext == output_ext end) do
       result
     else
       {:error, "#{output_ext} is not a supported output format"}
@@ -99,7 +99,7 @@ defmodule Librex do
   end
 
   defp supported_formats do
-    supported_document_formats ++ supported_presentation_formats ++ supported_spreadsheet_formats
+    supported_document_formats() ++ supported_presentation_formats() ++ supported_spreadsheet_formats()
   end
 
   defp validate_soffice(result, soffice_cmd) do

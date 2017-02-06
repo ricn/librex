@@ -37,7 +37,7 @@ defmodule LibrexTest do
   end
 
   defp test_conversion(input_file, output_format) do
-    output_file = random_path <> "." <> output_format
+    output_file = random_path() <> "." <> output_format
     refute File.exists? output_file
     assert { :ok, output_file } == Librex.convert(input_file, output_file)
   end
@@ -47,7 +47,7 @@ defmodule LibrexTest do
   end
 
   test ".convert! must return output file path" do
-    pdf_file = random_path <> ".pdf"
+    pdf_file = random_path() <> ".pdf"
     assert pdf_file == Librex.convert!(@docx_file, pdf_file)
   end
 
@@ -73,12 +73,12 @@ defmodule LibrexTest do
   end
 
   test ".convert must have the possibility to specify LibreOffice command" do
-    pdf_file = random_path <> ".pdf"
+    pdf_file = random_path() <> ".pdf"
     assert { :ok, pdf_file } == Librex.convert(@docx_file, pdf_file, System.find_executable("soffice"))
   end
 
   test ".convert must return error when file to convert is directory" do
-    pdf_file = random_path <> ".pdf"
+    pdf_file = random_path() <> ".pdf"
     assert Librex.convert(System.tmp_dir!, pdf_file) == {:error, :eisdir}
   end
 
