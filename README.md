@@ -36,6 +36,7 @@ Add this to your `mix.exs` file, then run `mix do deps.get, deps.compile`:
 The following people have contributed ideas, documentation, or code to Librex:
 
 * Richard Nyström
+* Sergey Chechaev
 
 ## Contributing
 
