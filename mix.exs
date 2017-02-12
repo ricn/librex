@@ -3,7 +3,7 @@ defmodule Librex.Mixfile do
 
   def project do
     [app: :librex,
-     version: "1.0.1",
+     version: "1.0.2",
      elixir: "~> 1.0",
      description: description(),
      package: package(),
@@ -16,11 +16,11 @@ defmodule Librex.Mixfile do
   end
 
   defp deps do
-    [{:secure_random, "~> 0.2"},
+    [{:secure_random, "~> 0.5"},
      {:inch_ex, "~> 0.5", only: :docs},
-     {:earmark, "~> 0.2", only: :dev},
-     {:ex_doc, "~> 0.11", only: :dev},
-     {:excoveralls, "~> 0.5", only: [:dev, :test]}]
+     {:earmark, "~> 1.1", only: :dev},
+     {:ex_doc, "~> 0.14", only: :dev},
+     {:excoveralls, "~> 0.6", only: [:dev, :test]}]
   end
 
   defp description do
@@ -30,6 +30,7 @@ defmodule Librex.Mixfile do
   defp package do
     [files: ["lib", "mix.exs", "README*", "LICENSE*"],
      contributors: ["Richard Nyström", "Sergey Chechaev"],
+     maintainers: ["Richard Nyström"],
      licenses: ["MIT"],
      links: %{"GitHub" => "https://github.com/ricn/librex", "Docs" => "http://hexdocs.pm/librex"}]
   end
