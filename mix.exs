@@ -29,7 +29,7 @@ defmodule Librex.Mixfile do
 
   defp package do
     [files: ["lib", "mix.exs", "README*", "LICENSE*"],
-     contributors: ["Richard Nyström"],
+     contributors: ["Richard Nyström", "Sergey Chechaev"],
      maintainers: ["Richard Nyström"],
      licenses: ["MIT"],
      links: %{"GitHub" => "https://github.com/ricn/librex", "Docs" => "http://hexdocs.pm/librex"}]
