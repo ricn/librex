@@ -18,8 +18,8 @@ defmodule Librex.Mixfile do
   defp deps do
     [{:secure_random, "~> 0.5"},
      {:inch_ex, "~> 0.5", only: :docs},
-     {:earmark, "~> 1.1", only: :dev},
-     {:ex_doc, "~> 0.14", only: :dev},
+     {:earmark, "~> 1.2", only: :dev},
+     {:ex_doc, "~> 0.16", only: :dev},
      {:excoveralls, "~> 0.6", only: [:dev, :test]}]
   end
 
