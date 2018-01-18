@@ -22,8 +22,8 @@ defmodule Librex.Mixfile do
       {:secure_random, "~> 0.5"},
       {:inch_ex, "~> 0.5", only: :docs},
       {:earmark, "~> 1.2", only: :dev},
-      {:ex_doc, "~> 0.16", only: :dev},
-      {:excoveralls, "~> 0.6", only: [:dev, :test]}
+      {:ex_doc, "~> 0.18", only: :dev},
+      {:excoveralls, "~> 0.8", only: [:dev, :test]}
     ]
   end
 
