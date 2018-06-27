@@ -1,5 +1,4 @@
-Librex
-======
+<p align="left"><img src="logo/horizontal.png" alt="librex" height="110px"></p>
 
 Elixir library to convert office documents to other formats using LibreOffice.
 
